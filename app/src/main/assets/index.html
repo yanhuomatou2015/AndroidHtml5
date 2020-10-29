@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Android与JavaScript的混合开发</title>
+  <style type="text/css">
+    .a {background: #1ba2d8;margin-top: 20px;height: 45px;}
+    .b {background:#0fad24;margin-top: 20px;height: 45px; }
+    body{
+      background: #a80e0e;
+    }
+    </style>
+</head>
+
+<body>
+  <label>红色区域为加载网页界面</label>
+  <center>
+    <div>
+      <button  onclick="jsCallandroid()" class="a">js调用android方法</button>
+    </div>
+    <div>
+      <button onclick="jsCallandroidCallBackJs()" class="b">js调用android方法再callback(回调)js方法</button>
+    </div>
+  </center>
+  
+</body>
+<script  >
+  function jsCallandroid() {
+    //console.log("js调用android方法")
+    var jsonData={"toast":"js调了android的showToast()"};
+    window.jsInterface.showToast(JSON.stringify(jsonData) );
+ }
+ function jsCallandroidCallBackJs() {
+    //console.log("js调用android方法再callback(回调)js方法")
+    var json={"callback":"receiveAndroidData"}
+    window.jsInterface.getrequestData(JSON.stringify(json));
+ }
+ 
+ var showMessage=function (json){
+    alert(JSON.stringify(json))
+ }
+
+ var receiveAndroidData=function(json){
+    alert(JSON.stringify(json))
+ }
+
+</script>
+</html>
+
+
