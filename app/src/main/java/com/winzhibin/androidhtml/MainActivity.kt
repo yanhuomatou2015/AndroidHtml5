@@ -10,7 +10,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.json.JSONObject
 
-
+/**
+ * Created by wenzhibin(yanhuomatou2015) on 2020/10/30.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val mWebView: WebView by lazy {
@@ -24,8 +26,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setWebView()
+
+        //android调用H5方法
        mbtn.onClick {
-           //android调用H5方法
+
            var json=JSONObject()
            json.put("alert","android调用js的showMessage()")
            mWebView.loadUrl("javascript:showMessage("+json.toString()+")")
@@ -41,7 +45,9 @@ class MainActivity : AppCompatActivity() {
         //2.2设置chrome浏览器
         mWebView.webChromeClient=MyWebChromeClient()
         //设置android与h5通信的桥梁
-        mWebView.addJavascriptInterface(JavaScriptMethods(this,mWebView),"jsInterface") //jsInterface是JavaScriptMethods类的别名
+        //"jsInterface"是JavaScriptMethods类的别名
+        mWebView.addJavascriptInterface(JavaScriptMethods(this,mWebView),"jsInterface")
+
         //3.加载网页
         mWebView.loadUrl("http://192.168.254.159:8080/index.html")
     }
